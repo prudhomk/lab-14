@@ -1,6 +1,6 @@
 const users = [
   {
-    name: 'me',
+    name: 'Me',
     email: 'me@mail.com',
     password: 'password'
   }
