@@ -24,6 +24,7 @@ describe('API Routes', () => {
           email: 'me@mail.com',
           password: 'password'
         });
+      console.log('Here', response.body);
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(user);
@@ -40,14 +41,15 @@ describe('API Routes', () => {
     //  .set('Authorization', user.token);
     
     it('POST chore to /api/todos', async () => {
+    //  console.log(user);
       const response = await request
-        .post('/api/t odos')
+        .post('/api/todos')
         .set('Authorization', user.token)
         .send(chore);
 
       //  expect(response.status).toBe(200);
       expect(response.body).toEqual({
-        userId: user.ud,
+        userId: user.id,
         ...chore
       });
 
