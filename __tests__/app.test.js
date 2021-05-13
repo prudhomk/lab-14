@@ -24,9 +24,10 @@ describe('API Routes', () => {
           email: 'me@mail.com',
           password: 'password'
         });
+      console.log('Here', response.body);
 
       expect(response.status).toBe(200);
-
+      expect(response.body).toEqual(user);
       user = response.body;
     });
 
@@ -39,7 +40,24 @@ describe('API Routes', () => {
     // append the token to your requests:
     //  .set('Authorization', user.token);
     
-    it.only('GET my /api/me/todos', async () => {
+    it('POST chore to /api/todos', async () => {
+    //  console.log(user);
+      const response = await request
+        .post('/api/todos')
+        .set('Authorization', user.token)
+        .send(chore);
+
+      //  expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        userId: user.id,
+        ...chore
+      });
+
+      chore = response.body;
+    });
+
+
+    it('GET my /api/me/todos', async () => {
 
       const getTodoResponse = await request 
         .post('/api/todos')
@@ -60,21 +78,6 @@ describe('API Routes', () => {
     });
     
     
-    
-    it('POST chore to /api/todos', async () => {
-      const response = await request
-        .post('/api/todos')
-        .set('Authorization', user.token)
-        .send(chore);
-
-      expect(response.status).toBe(200);
-      expect(response.body).toEqual({
-        userId: user.ud,
-        ...chore
-      });
-  
-      chore = response.body;
-    });
 
   });
 });
