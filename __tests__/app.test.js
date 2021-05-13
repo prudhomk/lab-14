@@ -54,12 +54,12 @@ describe('API Routes', () => {
         .send(chore);
 
       //  expect(response.status).toBe(200);
-      chore = response.body;
       expect(response.body).toEqual({
         userId: user.id,
         ...chore
       });
 
+      chore = response.body;
       
     });
 
