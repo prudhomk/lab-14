@@ -21,7 +21,7 @@ async function run() {
       })
     );
     
-    const user = data[0].rows[0];
+    const user = data.rows[0];
 
     await Promise.all(
       todos.map(todo => {
