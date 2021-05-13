@@ -24,11 +24,17 @@ describe('API Routes', () => {
           email: 'me@mail.com',
           password: 'password'
         });
-      console.log('Here', response.body);
+     
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(user);
+      expect(response.body).toEqual({
+        id: expect.any(Number),
+        name: 'Me',
+        email: 'me@mail.com',
+        token: expect.any(String)
+      });
       user = response.body;
+     
     });
 
     let chore = {
@@ -48,12 +54,13 @@ describe('API Routes', () => {
         .send(chore);
 
       //  expect(response.status).toBe(200);
+      chore = response.body;
       expect(response.body).toEqual({
         userId: user.id,
         ...chore
       });
 
-      chore = response.body;
+      
     });
 
 
@@ -63,18 +70,18 @@ describe('API Routes', () => {
         .post('/api/todos')
         .set('Authorization', user.token)
         .send({
-          task: 'Wash Dishes',
+          task: 'Walk Dog',
           completed: false
         });
 
       expect(getTodoResponse.status).toBe(200);
-      const chore = getTodoResponse.body;
+      const chore2 = getTodoResponse.body;
 
       const response = await request.get('/api/me/todos')
         .set('Authorization', user.token);
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual([chore]);
+      expect(response.body).toEqual([chore2]);
     });
     
     
