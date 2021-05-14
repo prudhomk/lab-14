@@ -26,7 +26,7 @@ async function run() {
     await Promise.all(
       todos.map(todo => {
         return client.query(`
-        INSERT INTO todo (task, completed, user_id)
+        INSERT INTO todos (task, completed, user_id)
         VALUES ($1, $2, $3)
         `,
         [todo.task, todo.completed, user.id]);

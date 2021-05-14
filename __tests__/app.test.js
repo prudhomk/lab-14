@@ -97,6 +97,16 @@ describe('API Routes', () => {
     });
     
     
+    test('DELETE chore from /api/todos/:id', async () => {
+      const response = await request.delete(`/api/todos/${chore.id}`).set('Authorization', user.token);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(chore);
+      
+      const getResponse = await request.get('/api/me/todos')
+        .set('Authorization', user.token);
+      expect(getResponse.status).toBe(200);
+      expect(getResponse.body.find(todo => todo.id === chore.id)).toBeUndefined();
+    });
 
   });
 });
