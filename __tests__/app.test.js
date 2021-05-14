@@ -65,9 +65,9 @@ describe('API Routes', () => {
 
     it('PUT updated chore to /api/todos/:id/completed', async () => {
       chore.completed = true;
-
+  
       const response = await request
-        .put(`/api/todos/${chore.id}`)
+        .put(`/api/todos/${chore.id}/completed`)
         .set('Authorization', user.token)
         .send(chore);
 
