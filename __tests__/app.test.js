@@ -40,13 +40,13 @@ describe('API Routes', () => {
     let chore = {
       id: expect.any(Number),
       task: 'Wash Dishes',
-      completed: false
+      //completed: false
     };
 
     // append the token to your requests:
     //  .set('Authorization', user.token);
     
-    it('POST chore to /api/todos', async () => {
+    it.only('POST chore to /api/todos', async () => {
     //  console.log(user);
       const response = await request
         .post('/api/todos')
